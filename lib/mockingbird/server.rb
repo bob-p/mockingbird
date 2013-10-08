@@ -8,11 +8,11 @@ module Mockingbird
   #   end
   #
   # Once configured, a server may be started using
-  # 
+  #
   #   start!(:host=>'0.0.0.0',:port=>NNN)
   #
-  # If you're using Mockingbird directly from test (test/unit, etc), it's 
-  # recommended that you use the simpler convenience interface defined on 
+  # If you're using Mockingbird directly from test (test/unit, etc), it's
+  # recommended that you use the simpler convenience interface defined on
   # the Mockingbird module.
   module Server
 
@@ -71,7 +71,8 @@ module Mockingbird
 
     def send_chunk(chunk)
       len = chunk_length(chunk)
-      send_data "#{len.to_s(16)}\r\n"
+      send_data "#{len.to_s.length}\r\n"
+      send_data "#{(len - 4)}\r\n"
       send_data "#{chunk}\r\n"
     end
 
